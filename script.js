@@ -81,7 +81,7 @@ $(document).ready(function () {
             message: form.message.value
         };
 
-        fetch("https://script.google.com/macros/s/AKfycbxb19VEr1-K0md-uNYgnJuvw9tiJpcs9PhDCOZd1W96/exec", {
+        fetch("https://script.google.com/macros/s/AKfycbzBOp7Fc4Oq1XdTXu3pDF84AAs0U6J8ChDZ9OQ2jlOE2JWe4H-dEYSRHQrQDrbJzWlzYA/exec", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData)
