@@ -70,30 +70,28 @@ $(document).ready(function () {
     });
 
     // contact form submission to Google Sheets
+    // contact form submission to Google Form (working IDs)
     $("#contact-form").on("submit", function (e) {
         e.preventDefault();
 
         const form = this;
-        const formData = {
-            name: form.name.value,
-            email: form.email.value,
-            subject: form.subject.value,
-            message: form.message.value
-        };
+        const formData = new FormData();
+        formData.append("entry.22192394", form.name.value);       // Name
+        formData.append("entry.650017811", form.email.value);     // Email
+        formData.append("entry.1322673744", form.message.value);  // Message
 
-        fetch("https://script.google.com/macros/s/AKfycbwXDeLPOwnCRB89uF2qwziJH_gZNaEL3YNR-PINJcIoLV43USPqu6EC2YaxDkd09f1Y0w/exec", {
+        fetch("https://docs.google.com/forms/d/e/1FAIpQLSdrG7Esnh02PIY-NIFaF5_x56NIe-zd42tG5Lnhbq4bCM89Ug/formResponse", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData)
+            mode: "no-cors",
+            body: formData
         })
-        .then(response => response.json())
-        .then(data => {
-            alert("✅ Message sent successfully!");
-            form.reset();
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            alert("❌ Failed to send message. Please try again.");
-        });
+            .then(() => {
+                alert("✅ Submitted successfully!");
+                form.reset();
+            })
+            .catch(() => {
+                alert("❌ Submission failed. Please try again.");
+            });
     });
+
 });
